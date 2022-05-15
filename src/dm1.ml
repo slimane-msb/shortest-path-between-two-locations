@@ -24,9 +24,9 @@
 
 
 let remplieRect matrix x y l h =
-  for i=0 to l do 
-    for j =0 to h do
-      matrix.(x+i).(y+j) <- 0; 
+  for i=x to x+l-1 do 
+    for j =y to y+h-1 do
+      matrix.(i).(j) <- 0; 
     done
   done
 ;;
