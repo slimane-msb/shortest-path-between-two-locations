@@ -1,0 +1,30 @@
+8 width
+2 nombre de rec intraversable
+2224  22 cord of first point 24 width and heigth
+3131  same for the second rectangle 
+
+1. n^2
+    case => 8 oct 
+    all => 8*n^2
+    ram de 8gb peut avoir 8G case et donc de taille sqrt(8g)=89442 
+
+
+    try ocamlpro . co 
+
+
+try to make x1=x2 same for y
+so decease if possible and inrese on if not 
+stepx=1;
+stepy=1;
+while (x1 not x2 or y1 not Y2 )
+    int toDox=1;
+    int toDoY=1;
+    if x1>x2 toDoX =-1
+    if y1>y2 toDoY = -1
+    if x1==x2 todoX = 0
+    if y1=y2 toDoY = 0
+    if terrain.(x+todoX).(y+todoY) ==1 
+        x1+=todoX
+        y1+=todoY
+    else
+        stepx+=;
