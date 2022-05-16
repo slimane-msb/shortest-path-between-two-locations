@@ -1,3 +1,19 @@
+
+(*
+Combien de cases contient le tableau t, en fonction de la taille n du terrain ? À partir de quelle valeur de 푛
+environ risquez-vous de saturer la mémoire vive de votre ordinateur ? Vous pourrez supposer que l’espace
+mémoire utilisé par un tableau de taille s est environ 8s octets
+   
+1. n^2
+    case => 8 oct 
+    all => 8*n^2
+    ram de 8gb peut avoir 8G case et donc de taille sqrt(8g)=89442 
+
+*)
+
+
+
+
 (**
    Fonction de lecture du fichier d'entrée
      load: string -> (int * int) list * int
@@ -36,6 +52,8 @@ let remplieRect matrix x y l h =
 
 
 (*
+  une fonction qui, partant de n et de la liste des rectangles intraversables crée un tableau t représentant
+  le terrain.
   return une matrice terrain a partir d'une list de rectangle 
 *)
 let repTerrain n listTerrain =
@@ -56,11 +74,25 @@ let repTerrain n listTerrain =
   afficher une array 2d   
 *)
 
-let printMatrix matrix n =
+let printMatrixWithCoord matrix n =
   for i=0 to n-1 do 
     for j =0 to n-1 do
       Printf.printf "matrix.(%d).(%d)= %d\n" i j matrix.(i).(j); 
     done
+  done
+;;
+
+
+(*
+  afficher une array 2d sous forme d'une grille  
+*)
+
+let printMatrix matrix n =
+  for j=n-1 downto 0 do 
+    for i =0 to n-1 do
+      Printf.printf "%d " matrix.(i).(j); 
+    done;
+    Printf.printf "\n";
   done
 ;;
 
@@ -94,6 +126,9 @@ let voisin g vus n x y =
     voisin_path: (bol*(int*int)list) list de path de tous les voisins 
     paire: (int*int) coord du la case actuelle 
   :return: les path ayant bol=true ou (false,[]) sinon 
+
+  une fonction d’exploration du terrain. Cette fonction doit prendre en entrée le tableau t, les coordon  nées d’un point de départ et d’un point d’arrivée, et renvoyer un itinéraire valide sous la forme d’une liste
+  de paires de coordonnées, parcour en profondeur 
 *)
 let rec return_valid_path voisin_path paire =
   match voisin_path with 
@@ -150,10 +185,14 @@ let print_path p =
 
 
 (* testing *)
+(*
+  u’il prenne en entrée un fchier décrivant un terrain et affche un itinéraire   
+*)
 let listTerrain,n = (load "terrain.txt") in 
 
 let terrain = repTerrain n listTerrain in 
 printMatrix terrain n;
+Printf.printf "le chemin entre (%d,%d) et la dest (%d,%d) est : \n" 2 0 4 3;
 print_path (explore_find_path terrain 2 0 4 3);;
 
 (* end testing *)
