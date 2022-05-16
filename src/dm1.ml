@@ -22,7 +22,10 @@
    !murs, n
 
 
-
+(*
+   fonction pour remplir un rectangle, et donc pour qu'ils soit pas traversable sur la matrice
+   0 pour non traversable 
+*)
 let remplieRect matrix x y l h =
   for i=x to x+l-1 do 
     for j =y to y+h-1 do
@@ -32,7 +35,9 @@ let remplieRect matrix x y l h =
 ;;
 
 
-(* t.(0).(1) <- 2*)
+(*
+  return une matrice terrain a partir d'une list de rectangle 
+*)
 let repTerrain n listTerrain =
   let matrixRes = Array.make_matrix n n 1 in
 
@@ -47,6 +52,10 @@ let repTerrain n listTerrain =
   matrixRes
 ;;
 
+(*
+  afficher une array 2d   
+*)
+
 let printMatrix matrix n =
   for i=0 to n-1 do 
     for j =0 to n-1 do
@@ -56,7 +65,15 @@ let printMatrix matrix n =
 ;;
 
 
-
+(* 
+  :param: 
+    g (int array)  -> terrain 
+    vus (bol array)-> matrice des case deja visitees
+    n (int)        -> longeur des ces matrices
+    x (int)        -> point.x
+    y (int)        -> point.y
+  :return: (int * int) list de toutes les cases voisine traversable et pas encore visitees
+*)
 let voisin g vus n x y =
   let res = [(x,y+1);(x,y-1);(x+1,y);(x-1,y)] in 
   let rec loop res=
@@ -72,12 +89,12 @@ let voisin g vus n x y =
 ;; 
 
 
-
-
-
-
-
-
+(*
+  :param: 
+    voisin_path: (bol*(int*int)list) list de path de tous les voisins 
+    paire: (int*int) coord du la case actuelle 
+  :return: les path ayant bol=true ou (false,[]) sinon 
+*)
 let rec return_valid_path voisin_path paire =
   match voisin_path with 
   [] -> (false,[])
@@ -86,18 +103,26 @@ let rec return_valid_path voisin_path paire =
     else return_valid_path listlist paire
 ;;
 
-
+(*
+  int->int->int->int->bol 
+  :return: si point1 = point2
+*)
 let posCmp x y  x2 y2 = 
   ( (x=x2) && (y=y2) ) 
 ;;  
 
 
-(* explore the matrix
-  each step ahead save to path
-  step back delete path 
-  voisin = +-1xy unless =0
-  if end = start return path and end all
-  *)
+(* 
+  :param: 
+    terrain: int array -> matrice du terrain 
+    x1 x2 y1 y2 : int->int->int->int : coord des point src et dist
+  :return: valid path entre p1 et p2 
+    vus: bol array -> case visitees 
+    loop x y -> trouver un chemin de x y a x2 y2 , et mettre x y comme visitees
+    1. trouver les voisins valides de x y 
+    2. trouver un chemin entre chaque voisin et destination (true,chemin) ou (false, []) si aucun chemin 
+    3. return valid_path : le premier chemin valid parmis les chemin des voisin auquel on ajout (x,y)
+*)
 let rec explore_find_path terrain x1 y1 x2 y2 =
   let n = Array.length terrain in
   let vus = Array.make_matrix n n false in
@@ -114,10 +139,9 @@ let rec explore_find_path terrain x1 y1 x2 y2 =
 ;;
 
 
-
-
-
-
+(*
+  afficher (int*int) list
+*)
 let print_path p =
   List.iter (fun (x, y) -> Printf.printf "(%d, %d) " x y) p;
   Printf.printf "\n"
