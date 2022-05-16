@@ -1,13 +1,17 @@
 
 (*
-Combien de cases contient le tableau t, en fonction de la taille n du terrain ? À partir de quelle valeur de 푛
-environ risquez-vous de saturer la mémoire vive de votre ordinateur ? Vous pourrez supposer que l’espace
-mémoire utilisé par un tableau de taille s est environ 8s octets
-   
-1. n^2
-    case => 8 oct 
-    all => 8*n^2
-    ram de 8gb peut avoir 8G case et donc de taille sqrt(8g)=89442 
+questions: 
+q1.1: 
+      Combien de cases contient le tableau t, en fonction de la taille n du terrain ? À partir de quelle valeur de 푛
+      environ risquez-vous de saturer la mémoire vive de votre ordinateur ? Vous pourrez supposer que l’espace
+      mémoire utilisé par un tableau de taille s est environ 8s octets
+        
+      1. n^2
+          case => 8 oct 
+          all => 8*n^2
+          ram de 8gb peut avoir 8G case et donc de taille sqrt(8g)=89442 
+
+q :
 
 *)
 
