@@ -45,6 +45,17 @@ correspondantes.
 ![image](https://user-images.githubusercontent.com/72779962/168881743-139beb88-acfb-467c-b76f-a26f3c79dbe4.png)
 
 
+![image](https://user-images.githubusercontent.com/72779962/168886417-29a1faa1-9695-46c9-8228-d34776aa74b8.png)
+
+
+![image](https://user-images.githubusercontent.com/72779962/168886470-0c3b83ba-9741-4976-aeb5-2b3c3f8ef9ad.png)
+
+
+![image](https://user-images.githubusercontent.com/72779962/168886650-f048c5c6-e050-4e97-8571-b67f16f574b2.png)
+
+
+
+![image](https://user-images.githubusercontent.com/72779962/168887178-5651eceb-a53f-4094-bd72-eda53d37a8de.png)
 
 
 
