@@ -5,6 +5,10 @@ Find the best route between two geographical locations in ocalm using graph theo
 On se place sur un terrain à deux dimensions, dont certaines zones sont intraversables. On cherche un itinéraire, si possible pas trop long, entre deux points donnés.
 
 
+![image](https://user-images.githubusercontent.com/72779962/168636239-8bb82826-490d-4d1e-b05b-ca57ddc36f91.png)
+
+
+
 
 ## INPUT : 
 Le terrain est un carré de côté n, dont on retire r rectangles intraversables. Il est fourni sous la forme d’un fichier
@@ -33,6 +37,28 @@ On résume le terrain par un quadtree . Ce quadtree définit un graphe pondéré
 — les voisins d’un sommet sont les régions libres adjacentes,
 — la distance entre deux sommets adjacents est la distance euclidienne entre les centres des deux régions libres
 correspondantes.
+
+
+![image](https://user-images.githubusercontent.com/72779962/168636176-35a1315a-984e-487b-a3b7-b9633be21979.png)
+
+
+![image](https://user-images.githubusercontent.com/72779962/168881743-139beb88-acfb-467c-b76f-a26f3c79dbe4.png)
+
+
+![image](https://user-images.githubusercontent.com/72779962/168886417-29a1faa1-9695-46c9-8228-d34776aa74b8.png)
+
+
+![image](https://user-images.githubusercontent.com/72779962/168886470-0c3b83ba-9741-4976-aeb5-2b3c3f8ef9ad.png)
+
+
+![image](https://user-images.githubusercontent.com/72779962/168886650-f048c5c6-e050-4e97-8571-b67f16f574b2.png)
+
+
+
+![image](https://user-images.githubusercontent.com/72779962/168887178-5651eceb-a53f-4094-bd72-eda53d37a8de.png)
+
+
+![image](https://user-images.githubusercontent.com/72779962/168888341-905fe76f-c989-44b9-ac13-529411600fe9.png)
 
 
 
