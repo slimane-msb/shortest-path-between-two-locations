@@ -16,6 +16,9 @@ q :
 *)
 
 
+(****************************************************************************************
+                                        Version 1   
+****************************************************************************************)
 
 
 (**
@@ -239,5 +242,88 @@ print_path_in_terrain terrain n path;
 
 (* end testing *)
 
+(****************************************************************************************
+                                        Version 2   
+****************************************************************************************)
+
+(****************************************************************************************
+                                        Partie A   
+****************************************************************************************)
+
+(**
+   Type de données pour représenter un quadtree dont les régions libres
+   sont numérotées. Pendant la construction, affectez arbitrairement le
+   numéro (-1) à toutes les régions. La fonction  (numerote)  fournie 
+   donnera un numéro unique à chaque région une fois l'arbre complet. 
+*)
+type qtree =
+  | Libre of int (* numéro *)
+  | Mur
+  | Quad of qtree * qtree * qtree * qtree (* no, ne, so, se *)
+
+(**
+   Fonction de numérotation des quadtrees
+     numerote: qtree -> int -> qtree * int
+
+   L'appel  (numerote qt k)  renvoie une paire  (qt', k')  où 
+   - (qt') est un quadtree de même structure que (qt) mais dont les 
+     régions libres sont numérotées consécutivement à partir de (k)
+   - (k') est l'entier qui suit le dernier numéro utilisé
+ *)
+let rec numerote qt k = match qt with
+  | Libre _ -> Libre k, k+1
+  | Mur     -> Mur, k
+  | Quad(no, ne, so, se) ->
+     let no, k = numerote no k in
+     let ne, k = numerote ne k in
+     let so, k = numerote so k in
+     let se, k = numerote se k in
+     Quad(no, ne, so, se), k
+
+(**
+   Affichage d'un quadtree 
+   (vue hiérarchique avec retrait proportionnel à la profondeur)
+ *)     
+open Printf
+let print_qtree qt =
+  let offset n = String.make n ' ' in
+  let rec print o = function
+    | Mur -> printf "%sMur\n" (offset o)
+    | Libre k -> printf "%sLibre %d\n" (offset o) k
+    | Quad(no, ne, so, se) ->
+       printf "%sQuad\n" (offset o);
+       print (o+2) no;
+       print (o+2) ne;
+       print (o+2) so;
+       print (o+2) se
+  in
+  print 0 qt
+
+(**
+   Fonction de construction d'un quadtree à partir d'une liste de
+   régions intraversables
+     list2qtree: int -> (int * int * int * int) list -> qtree
+
+   Arguments : 
+   - (n) est la longueur du côté du terrain
+   - (l) est la liste des rectangles intraversables
+ *)
+let rec list2qtree n l =
+  failwith "not implemented"
+
+(**
+   Fonction de calcul des coordonnées des centres des régions libres.
+   Renvoie un tableau de paires de coordonnées.
+   
+   Arguments :
+   - (qt) le quadtree
+   - (k) le nombre de régions libres
+   - (n) la longueur du côté du terrain
+   Pré-condition :
+   - les régions doivent être numérotées de 0 à k-1
+ *)
+let mk_coords qt k n =
+  failwith "not implemented"
+  
 
 
