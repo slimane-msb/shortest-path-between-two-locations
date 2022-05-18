@@ -299,6 +299,21 @@ let print_qtree qt =
   in
   print 0 qt
 
+
+
+(*
+mur2qtree: int -> int -> int -> int -> int -> qtree telle que mur2qtree x y dx dy  n
+renvoie un quadtree représentant un terrain de côté n, qui est libre à l’exclusion d’un rectangle décrit par les
+coordonnées (x,y) de son coin sud-ouest, sa largeur dx et sa hauteur dy
+ à chaque feuille Libre on associe un nombre entier, qui permettra de l’identifer
+en tant que nœud du graphe < num =-1 > par defautl 
+*)
+
+let mur2qtree x y dx dy n = 
+
+
+
+
 (**
    Fonction de construction d'un quadtree à partir d'une liste de
    régions intraversables
@@ -325,5 +340,7 @@ let rec list2qtree n l =
 let mk_coords qt k n =
   failwith "not implemented"
   
+
+
 
 
