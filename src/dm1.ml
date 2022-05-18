@@ -47,7 +47,7 @@ q :
    0 pour non traversable 
 *)
 let remplieRect matrix x y l h =
-  for i=x to x+l-1 do 
+  for i=x to x+l- 1 do 
     for j =y to y+h-1 do
       matrix.(i).(j) <- 0; 
     done
