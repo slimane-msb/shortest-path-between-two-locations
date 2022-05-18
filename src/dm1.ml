@@ -182,7 +182,39 @@ let rec explore_find_path terrain x1 y1 x2 y2 =
 let print_path p =
   List.iter (fun (x, y) -> Printf.printf "(%d, %d) " x y) p;
   Printf.printf "\n"
+;;
 
+
+
+(*
+  :return: true si (x,y) appartient a path 
+  :param: 
+    path (int*int) list 
+    x int 
+    y int 
+*)
+let rec path_contains path x y = 
+  match path with 
+  [] -> false
+  | (x1,y1)::ppath -> 
+    if x1 = x && y1 = y then true
+      else path_contains ppath x y
+;;
+
+
+(*
+  afficher le chemin sur la matrice comme src ***** dest   
+*)
+let print_path_in_terrain matrix n path =
+  for j = n-1 downto 0 do 
+    for i = 0 to n-1 do
+      if ( path_contains path i j ) then 
+        Printf.printf "* " 
+      else 
+        Printf.printf "%d " matrix.(i).(j); 
+    done;
+    Printf.printf "\n";
+  done
 ;;
 
 
@@ -195,9 +227,15 @@ let print_path p =
 let listTerrain,n = (load "terrain.txt") in 
 
 let terrain = repTerrain n listTerrain in 
+
 printMatrix terrain n;
+
 Printf.printf "le chemin entre (%d,%d) et la dest (%d,%d) est : \n" 2 0 4 3;
-print_path (explore_find_path terrain 2 0 4 3);;
+let path = (explore_find_path terrain 2 0 4 3) in
+print_path path;
+
+Printf.printf "afficher le terrain avec chemin \n";
+print_path_in_terrain terrain n path;
 
 (* end testing *)
 
