@@ -299,17 +299,53 @@ let print_qtree qt =
   in
   print 0 qt
 
+(*
+     appartient_rect x y dx dy xCoord yCoord : int->int->int->int->int->int->bool
+     :param: 
+      x y dx dy representent le rectangle 
+      xCoord yCoord representent les coordonnees d'une case dans la grille 
+      :return: true si la case est dans le rectangle 
+*)
+let appartient_rect x y dx dy xCoord yCoord =
+  (xCoord<(x+dx) && xCoord>=x && yCoord<(y+dy) && yCoord>=y)
 
+
+(**
+  signature: mur2atree_basique: int -> int -> int -> int -> int -> int -> int -> qtree
+    :param: 
+      x y dx dy : pour le rectangle 
+      xCoord yCoord : les corrdonees du carree de taille n en rapport au carree initiale, 
+    :return: qtree non simplifie d'un terrain 
+
+*)
+let rec mur2qtree_basique x y dx dy n xCoord yCoord = 
+  if n=1 then 
+      if (appartient_rect x y dx dy xCoord yCoord) then Mur
+      else Libre
+  else 
+    Quad( mur2qtree_basique x y dx dy n/2 (xCoord)       (yCoord + n/2) ,
+          mur2qtree_basique x y dx dy n/2 (xCoord + n/2) (y0 + n/2) ,
+          mur2qtree_basique x y dx dy n/2 (x0)           (y0) ,
+          mur2qtree_basique x y dx dy n/2 (xCoord + n/2) (y0) )
 
 (*
-mur2qtree: int -> int -> int -> int -> int -> qtree telle que mur2qtree x y dx dy  n
-renvoie un quadtree représentant un terrain de côté n, qui est libre à l’exclusion d’un rectangle décrit par les
-coordonnées (x,y) de son coin sud-ouest, sa largeur dx et sa hauteur dy
- à chaque feuille Libre on associe un nombre entier, qui permettra de l’identifer
-en tant que nœud du graphe < num =-1 > par defautl 
-*)
+    mur2qtree: int -> int -> int -> int -> int -> qtree telle que mur2qtree x y dx dy  n
+    renvoie un quadtree représentant un terrain de côté n, qui est libre à l’exclusion d’un rectangle décrit par les
+    coordonnées (x,y) de son coin sud-ouest, sa largeur dx et sa hauteur dy
+    à chaque feuille Libre on associe un nombre entier, qui permettra de l’identifer
+    en tant que nœud du graphe < num =-1 > par defautl 
 
-let mur2qtree x y dx dy n = 
+    :signature: mur2qtree: int -> int -> int -> int -> int -> qtree
+    :param: 
+      x : int : 
+
+    1. construire l'arbre representant chaque case en fonction du rectangle 
+    2. appeler la fonction simplifier arabre 
+*)
+let mur2qtree x y dx dy n =
+  simplifie (mur2qtree_basique x y dx dy n 0 0)
+
+
 
 
 
