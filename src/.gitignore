@@ -23,6 +23,9 @@ plan.md
 *.exe 
 *.cmo 
 *.cmi 
+*.cmx 
+*.0
+exe
 
 
 # fichier text
