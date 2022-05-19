@@ -1,43 +1,41 @@
 # shortest-paths-between-two-locations
 Find the best route between two geographical locations in ocalm using graph theory and Dijkstra's algorithm
 
-## OBJECTIF : 
-On se place sur un terrain à deux dimensions, dont certaines zones sont intraversables. On cherche un itinéraire, si possible pas trop long, entre deux points donnés.
+## purpose : 
+We are placed in a two-dimensional terrain with some regions that cannot be crossed. We're looking for a path between two points that is as short as possible.
 
 
 ![image](https://user-images.githubusercontent.com/72779962/168636239-8bb82826-490d-4d1e-b05b-ca57ddc36f91.png)
 
 
 
+## INPUT:
+The terrain is a square of side n, from which we remove r impassable rectangles. It is provided as a file
+text structured as follows:
+1. the first line contains the number n,
+2. the second line contains the number r,
+3. the following r lines describe the r untraversable rectangles.
+Each rectangle is described by four positive integers, given in order: the x and y coordinates of the
+lower left corner, the width Dx and the height Dy. In practice, we can assume that n is a power of two.
+The starting point has the coordinates (n/2, 0), the arrival point the coordinates (n/2, n). The route to be provided in response is a sequence of pairs of coordinates, such that one can go from one point to the next in a straight line without crossing an impassable zone.
 
-## INPUT : 
-Le terrain est un carré de côté n, dont on retire r rectangles intraversables. Il est fourni sous la forme d’un fichier
-texte structuré ainsi :
-1. la première ligne contient le nombre n,
-2. la deuxième ligne contient le nombre r,
-3. les r lignes suivantes décrivent les r rectangles intraversables.
-Chaque rectangle est décrit par quatre nombres entiers positifs, donnés dans l’ordre : les coordonnées x et y du
-coin inférieur gauche, la largeur Dx et la hauteur Dy. En pratique, on pourra supposer que n est une puissance de deux. 
-Le point de départ a les coordonnées (n/2, 0), celui d’arrivée les coordonnées (n/2, n). L’itinéraire à fournir en réponse est une séquence de paires de coordonnées, telle que l’on puisse aller d’un point au suivant en ligne droite sans croiser de zone intraversable.
-
-L’objectif  est de réaliser un programme qui prend en entrée un fichier décrivant le terrain, et qui calcule un itinéraire entre le point de départ et le point d’arrivée. On s’intéressera à des terrains de dimensions variées 
-
+The objective is to create a program which takes as input a file describing the terrain, and which calculates a route between the starting point and the finishing point. We will be interested in land of various sizes
 
 
-# version 1 : 
-On représente le terrain par un tableau t à deux dimensions, dont chaque case correspond à un carré de côté 1.
-Plus précisément, la case ti,j contient true si le carré dont le coin inférieur gauche a les coordonnées (i, j) est
-traversable, et false sinon. Ce tableau décrit implicitement un graphe :
-— chaque case contenant true est un sommet,
-— les voisins d’un sommet sont les cases libres adjacentes (il y en a au maximum 4).
 
-# version 2 : 
-On résume le terrain par un quadtree . Ce quadtree définit un graphe pondéré de la manière suivante :
-— chaque feuille libre du quadtree est un sommet,
-— les voisins d’un sommet sont les régions libres adjacentes,
-— la distance entre deux sommets adjacents est la distance euclidienne entre les centres des deux régions libres
-correspondantes.
+# version 1:
+The terrain is represented by a two-dimensional array t, each cell of which corresponds to a square of side 1.
+More precisely, the box ti,j contains true if the square whose lower left corner has the coordinates (i, j) is
+traversable, and false otherwise. This table implicitly describes a graph:
+— each box containing true is a vertex,
+— the neighbors of a vertex are the adjacent free squares (there are a maximum of 4).
 
+# version 2:
+The terrain is summarized by a quadtree. This quadtree defines a weighted graph as follows:
+— each free leaf of the quadtree is a vertex,
+— the neighbors of a vertex are the adjacent free regions,
+— the distance between two adjacent vertices is the Euclidean distance between the centers of the two free regions
+corresponding.
 
 ![image](https://user-images.githubusercontent.com/72779962/169276762-2954fac7-d1b3-4589-ab4e-5840ee83ffe9.png)
 
