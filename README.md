@@ -39,6 +39,10 @@ On résume le terrain par un quadtree . Ce quadtree définit un graphe pondéré
 correspondantes.
 
 
+![image](https://user-images.githubusercontent.com/72779962/169276762-2954fac7-d1b3-4589-ab4e-5840ee83ffe9.png)
+
+
+
 ![image](https://user-images.githubusercontent.com/72779962/168636176-35a1315a-984e-487b-a3b7-b9633be21979.png)
 
 
