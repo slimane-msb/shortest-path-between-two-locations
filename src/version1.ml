@@ -37,7 +37,7 @@ let remplieRect matrix x y l h =
       matrix.(i).(j) <- 0; 
     done
   done
-;;
+
 
 
 (*
@@ -57,7 +57,7 @@ let repTerrain n listTerrain =
   in
   repTerrainMatrix matrixRes listTerrain ;
   matrixRes
-;;
+
 
 (*
   afficher une array 2d   
@@ -69,7 +69,7 @@ let printMatrixWithCoord matrix n =
       Printf.printf "matrix.(%d).(%d)= %d\n" i j matrix.(i).(j); 
     done
   done
-;;
+
 
 
 (*
@@ -83,7 +83,7 @@ let printMatrix matrix n =
     done;
     Printf.printf "\n";
   done
-;;
+
 
 
 (* 
@@ -107,7 +107,7 @@ let voisin g vus n x y =
           else (x,y)::(loop rres)
     in
     loop res
-;; 
+ 
 
 
 (*
@@ -123,7 +123,7 @@ let rec return_valid_path voisin_path paire =
   match voisin_path with 
   [] -> []
   |list::listlist ->  paire::list 
-;;
+
 
 (*
   int->int->int->int->bol 
@@ -131,7 +131,7 @@ let rec return_valid_path voisin_path paire =
 *)
 let posCmp x y  x2 y2 = 
   ( (x=x2) && (y=y2) ) 
-;;  
+  
 
 
 (* 
@@ -158,7 +158,7 @@ let rec explore_find_path terrain x1 y1 x2 y2 =
       end 
   in
   loop x1 y1
-;;
+
 
 
 (*
@@ -167,7 +167,7 @@ let rec explore_find_path terrain x1 y1 x2 y2 =
 let print_path p =
   List.iter (fun (x, y) -> Printf.printf "(%d, %d) " x y) p;
   Printf.printf "\n"
-;;
+
 
 
 
@@ -184,7 +184,7 @@ let rec path_contains path x y =
   | (x1,y1)::ppath -> 
     if x1 = x && y1 = y then true
       else path_contains ppath x y
-;;
+
 
 
 (*
@@ -200,6 +200,6 @@ let print_path_in_terrain matrix n path =
     done;
     Printf.printf "\n";
   done
-;;
+
 
 

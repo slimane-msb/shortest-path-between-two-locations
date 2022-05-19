@@ -57,6 +57,27 @@ let print_qtree qt =
   print 0 qt
 
 (*
+   simplifie: qtree -> qtree telle que simplifie at renvoie un nouveau quadtree simplifiant
+at si possible : si un nœud interne ne contient que des sous-arbres intégralement blancs ou intégralement noirs,
+ce nœud interne doit être remplacé par une feuille
+
+  :param: qt : quad tree
+  :return: qt: quad tree simplifie 
+  on renvoi le nombre associe a la premiere zone : Libre (1),Libre (2),Libre (3),Libre (4)) -> Libre (1)
+*)
+let rec simplifie qt = 
+    match qt with 
+      | Libre (nb) -> Libre (nb)
+      | Mur -> Mur
+      | Quad(qt1,qt2,qt3,qt4) -> 
+          let qts = Quad(simplifie qt1,simplifie qt2,simplifie qt3,simplifie qt4) in 
+          match qts with 
+            | Quad(Mur,Mur,Mur,Mur) -> Mur
+            | Quad(Libre (nb),Libre (nb2),Libre (nb3),Libre (nb4)) -> Libre (nb)
+            |  _ -> qts 
+
+
+(*
      appartient_rect x y dx dy xCoord yCoord : int->int->int->int->int->int->bool
      :param: 
       x y dx dy representent le rectangle 
@@ -76,14 +97,15 @@ let appartient_rect x y dx dy xCoord yCoord =
 
 *)
 let rec mur2qtree_basique x y dx dy n xCoord yCoord = 
-  if n=1 then 
+  if n=1 then begin 
       if (appartient_rect x y dx dy xCoord yCoord) then Mur
-      else Libre
+      else Libre (-1)
+    end 
   else 
-    Quad( mur2qtree_basique x y dx dy n/2 (xCoord)       (yCoord + n/2) ,
-          mur2qtree_basique x y dx dy n/2 (xCoord + n/2) (y0 + n/2) ,
-          mur2qtree_basique x y dx dy n/2 (x0)           (y0) ,
-          mur2qtree_basique x y dx dy n/2 (xCoord + n/2) (y0) )
+    Quad( mur2qtree_basique x y dx dy (n/2) (xCoord)       (yCoord + n/2) ,
+          mur2qtree_basique x y dx dy (n/2) (xCoord + n/2) (yCoord + n/2) ,
+          mur2qtree_basique x y dx dy (n/2) (xCoord)           (yCoord) ,
+          mur2qtree_basique x y dx dy (n/2) (xCoord + n/2) (yCoord) )
 
 (*
     mur2qtree: int -> int -> int -> int -> int -> qtree telle que mur2qtree x y dx dy  n
@@ -102,6 +124,13 @@ let rec mur2qtree_basique x y dx dy n xCoord yCoord =
 let mur2qtree x y dx dy n =
   simplifie (mur2qtree_basique x y dx dy n 0 0)
 
+
+let rec inter qt1 qt2 = 
+  match (qt1,qt2) with 
+  | ( _ , Libre(a))  -> qt1
+  | (Libre(a), _  ) -> qt2
+  | ( _ , Mur) | (Mur, _ ) -> Mur
+  | (Quad(qt11,qt12,qt13,qt14),Quad(qt21,qt22,qt23,qt24) ) -> Quad(inter qt11 qt21,inter qt12 qt22,inter qt13 qt23,inter qt14 qt24)
 
 
 

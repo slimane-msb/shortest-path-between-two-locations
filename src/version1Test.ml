@@ -1,7 +1,7 @@
  
 open Version1 ;;
 
-
+Printf.printf "testing version1\n";
 let listTerrain, n = (load "terrain.txt") in 
 
 let terrain = repTerrain n listTerrain in 
