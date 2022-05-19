@@ -1,3 +1,8 @@
+(****************************************************************************************
+                                        Version 1   
+****************************************************************************************)
+
+
 (**
    Fonction de lecture du fichier d'entrée
      load: string -> (int * int) list * int
@@ -27,7 +32,7 @@
    0 pour non traversable 
 *)
 let remplieRect matrix x y l h =
-  for i=x to x+l-1 do 
+  for i=x to x+l- 1 do 
     for j =y to y+h-1 do
       matrix.(i).(j) <- 0; 
     done
@@ -36,6 +41,8 @@ let remplieRect matrix x y l h =
 
 
 (*
+  une fonction qui, partant de n et de la liste des rectangles intraversables crée un tableau t représentant
+  le terrain.
   return une matrice terrain a partir d'une list de rectangle 
 *)
 let repTerrain n listTerrain =
@@ -56,11 +63,25 @@ let repTerrain n listTerrain =
   afficher une array 2d   
 *)
 
-let printMatrix matrix n =
+let printMatrixWithCoord matrix n =
   for i=0 to n-1 do 
     for j =0 to n-1 do
       Printf.printf "matrix.(%d).(%d)= %d\n" i j matrix.(i).(j); 
     done
+  done
+;;
+
+
+(*
+  afficher une array 2d sous forme d'une grille  
+*)
+
+let printMatrix matrix n =
+  for j=n-1 downto 0 do 
+    for i =0 to n-1 do
+      Printf.printf "%d " matrix.(i).(j); 
+    done;
+    Printf.printf "\n";
   done
 ;;
 
@@ -94,6 +115,9 @@ let voisin g vus n x y =
     voisin_path: (bol*(int*int)list) list de path de tous les voisins 
     paire: (int*int) coord du la case actuelle 
   :return: les path ayant bol=true ou (false,[]) sinon 
+
+  une fonction d’exploration du terrain. Cette fonction doit prendre en entrée le tableau t, les coordon  nées d’un point de départ et d’un point d’arrivée, et renvoyer un itinéraire valide sous la forme d’une liste
+  de paires de coordonnées, parcour en profondeur 
 *)
 let rec return_valid_path voisin_path paire =
   match voisin_path with 
@@ -143,20 +167,39 @@ let rec explore_find_path terrain x1 y1 x2 y2 =
 let print_path p =
   List.iter (fun (x, y) -> Printf.printf "(%d, %d) " x y) p;
   Printf.printf "\n"
-
 ;;
 
 
 
+(*
+  :return: true si (x,y) appartient a path 
+  :param: 
+    path (int*int) list 
+    x int 
+    y int 
+*)
+let rec path_contains path x y = 
+  match path with 
+  [] -> false
+  | (x1,y1)::ppath -> 
+    if x1 = x && y1 = y then true
+      else path_contains ppath x y
+;;
 
-(* testing *)
-let listTerrain,n = (load "terrain.txt") in 
 
-let terrain = repTerrain n listTerrain in 
-printMatrix terrain n;
-print_path (explore_find_path terrain 2 0 4 3);;
-
-(* end testing *)
-
+(*
+  afficher le chemin sur la matrice comme src ***** dest   
+*)
+let print_path_in_terrain matrix n path =
+  for j = n-1 downto 0 do 
+    for i = 0 to n-1 do
+      if ( path_contains path i j ) then 
+        Printf.printf "* " 
+      else 
+        Printf.printf "%d " matrix.(i).(j); 
+    done;
+    Printf.printf "\n";
+  done
+;;
 
 
