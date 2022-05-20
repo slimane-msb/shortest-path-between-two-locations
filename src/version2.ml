@@ -144,8 +144,10 @@ let rec inter qt1 qt2 =
 (*
   Une fonction qui combine les deux précédentes pour faire l’intersection des quadtrees correspondant à
   chaque région intraversable   
-  :signature: 
+  :signature: int -> (int*int*int*int) list -> Quad
   :param: 
+    - n taille du terrain 
+    - listTerrain : (int*int*int*int) list pour : < x y dx dy > list
   :return: qtree representes par cette liste de rectangles 
     - avoir une list de qtree pour chaque rectangle
     - avoir l'intersection de ces qtree
@@ -156,7 +158,21 @@ let rec get_terrain n listTerrain =
   | (x, y, dx, dy)::[] -> (mur2qtree x y dx dy n)
   | (x, y, dx, dy)::llistTerrain -> ( inter (mur2qtree x y dx dy n) (get_terrain n llistTerrain) )
 
-
+(*
+  Une fonction qui combine les deux précédentes pour faire l’intersection des quadtrees correspondant à
+  chaque région intraversable   
+  :signature: Quad list -> Quad
+  :param: 
+    - listqt : Quad list pour chaque rectangle
+  :return: qtree representes par cette liste de qt 
+    - avoir une list de qtree pour chaque rectangle
+    - avoir l'intersection de ces qtree
+*)
+let rec get_terrain_from_qt qt_list = 
+  match qt_list with 
+  | [] -> failwith "qt list est vide"
+  | qt::[] -> qt
+  | qt::qqt_list -> ( inter qt (get_terrain_from_qt qqt_list) )
 
 
 

@@ -31,6 +31,11 @@ let listTerrain, n = (load "terrain3rect.txt") in
 
 let terrain = get_terrain n listTerrain in 
 
-printf "\n******** Terrain a pleusieur rectangles *******\n\n"; print_qtree (terrain);
+printf "\n******** Terrain a pleusieur rectangles  a partir de la list des rectangle *******\n\n"; print_qtree (terrain);
 
-
+(****************************************************************************************
+                                        q3 Bis test    
+****************************************************************************************)
+let qt3 = mur2qtree 2 4 4 1 8 in 
+let terrain_qt = get_terrain_from_qt [qt1; qt2; qt3] in
+printf "\n******** Terrain a pleusieur rectangles a partir des qt list *******\n\n"; print_qtree (terrain_qt);
