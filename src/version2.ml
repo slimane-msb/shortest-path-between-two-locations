@@ -123,8 +123,16 @@ let rec mur2qtree_basique x y dx dy n xCoord yCoord =
 *)
 let mur2qtree x y dx dy n =
   simplifie (mur2qtree_basique x y dx dy n 0 0)
+  
 
-
+(*
+  Une fonction d’intersection qui, étant donnés deux quadtrees qt1 et qt2, calcule un nouveau quadtree faisant
+  l’intersection des régions libres de qt1 et qt2.  
+  :signature: quad -> quad -> quad 
+  :param: 
+    qt1, qt2 : quadtree avec region libre(nb)/Mur
+  :return: intersection des deux quadtree
+*)
 let rec inter qt1 qt2 = 
   match (qt1,qt2) with 
   | ( _ , Libre(a))  -> qt1
