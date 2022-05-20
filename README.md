@@ -30,6 +30,9 @@ traversable, and false otherwise. This table implicitly describes a graph:
 — each box containing true is a vertex,
 — the neighbors of a vertex are the adjacent free squares (there are a maximum of 4).
 
+![image](https://user-images.githubusercontent.com/72779962/169607436-6cf0ba5e-dc9c-4251-9128-3d5bf71d556e.png)
+
+
 # version 2:
 The field is summarized by a quadtree. This quadtree defines a weighted graph as follows:
 — each free leaf of the quadtree is a vertex,
@@ -38,6 +41,9 @@ The field is summarized by a quadtree. This quadtree defines a weighted graph as
 corresponding.
 
 ![image](https://user-images.githubusercontent.com/72779962/169276762-2954fac7-d1b3-4589-ab4e-5840ee83ffe9.png)
+
+
+![image](https://user-images.githubusercontent.com/72779962/169607334-d8ea3ecd-6004-4ba5-9eee-e2f9cbfecd1a.png)
 
 
 
