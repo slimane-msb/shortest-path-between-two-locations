@@ -152,11 +152,11 @@ let rec inter qt1 qt2 =
     - avoir une list de qtree pour chaque rectangle
     - avoir l'intersection de ces qtree
 *)
-let rec get_terrain n listTerrain = 
+let rec list2qtree n listTerrain = 
   match listTerrain with
   | [] -> failwith "listTerrain vide" 
   | (x, y, dx, dy)::[] -> (mur2qtree x y dx dy n)
-  | (x, y, dx, dy)::llistTerrain -> ( inter (mur2qtree x y dx dy n) (get_terrain n llistTerrain) )
+  | (x, y, dx, dy)::llistTerrain -> ( inter (mur2qtree x y dx dy n) (list2qtree n llistTerrain) )
 
 (*
   Une fonction qui combine les deux précédentes pour faire l’intersection des quadtrees correspondant à
@@ -176,17 +176,23 @@ let rec get_terrain_from_qt qt_list =
 
 
 
-(**
-   Fonction de construction d'un quadtree à partir d'une liste de
-   régions intraversables
-     list2qtree: int -> (int * int * int * int) list -> qtree
 
-   Arguments : 
-   - (n) est la longueur du côté du terrain
-   - (l) est la liste des rectangles intraversables
- *)
-let rec list2qtree n l =
-  failwith "not implemented"
+(****************************************************************************************
+                                        Partie B   
+****************************************************************************************)
+(*
+  numeroter les zones libres du terrain de 1 au NbdeZones libres 
+  :signature: Quad -> Quad
+  :param: 
+    - qt : quadtree representant le terrain 
+  :return: 
+    - quadtree numerote   
+*)
+let num_quad  qt = fst (numerote qt 1 ) 
+
+
+
+
 
 (**
    Fonction de calcul des coordonnées des centres des régions libres.
