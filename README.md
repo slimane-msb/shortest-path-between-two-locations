@@ -1,4 +1,4 @@
-# shortest-paths-between-two-locations
+# shortest-path-between-two-locations
 Find the best route between two geographical locations in ocalm using graph theory and Dijkstra's algorithm
 
 ## purpose : 
