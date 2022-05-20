@@ -123,7 +123,7 @@ let rec mur2qtree_basique x y dx dy n xCoord yCoord =
 *)
 let mur2qtree x y dx dy n =
   simplifie (mur2qtree_basique x y dx dy n 0 0)
-  
+
 
 (*
   Une fonction d’intersection qui, étant donnés deux quadtrees qt1 et qt2, calcule un nouveau quadtree faisant
@@ -139,6 +139,22 @@ let rec inter qt1 qt2 =
   | (Libre(a), _  ) -> qt2
   | ( _ , Mur) | (Mur, _ ) -> Mur
   | (Quad(qt11,qt12,qt13,qt14),Quad(qt21,qt22,qt23,qt24) ) -> Quad(inter qt11 qt21,inter qt12 qt22,inter qt13 qt23,inter qt14 qt24)
+
+
+(*
+  Une fonction qui combine les deux précédentes pour faire l’intersection des quadtrees correspondant à
+  chaque région intraversable   
+  :signature: 
+  :param: 
+  :return: qtree representes par cette liste de rectangles 
+    - avoir une list de qtree pour chaque rectangle
+    - avoir l'intersection de ces qtree
+*)
+let rec get_terrain n listTerrain = 
+  match listTerrain with
+  | [] -> failwith "listTerrain vide" 
+  | (x, y, dx, dy)::[] -> (mur2qtree x y dx dy n)
+  | (x, y, dx, dy)::llistTerrain -> ( inter (mur2qtree x y dx dy n) (get_terrain n llistTerrain) )
 
 
 
