@@ -205,22 +205,35 @@ let num_quad  qt = fst (numerote qt 0 )
    - les régions doivent être numérotées de 0 à k-1
  *)
 let mk_coords qt k n =
-  let coords = Array.make k (0,0)  in 
+  let coords = Array.make k (0. ,0. )  in 
   let rec mk_coords_aux qt coords n x y = 
+    let nf = float(n) in
     match qt with 
     | Mur -> ()
-    | Libre (nb) -> coords.(nb) <- (x+n/2, y+n/2);
+    | Libre (nb) -> coords.(nb) <- (x +. (nf/.2.) , y +. (nf/.2.) );
     | Quad (qt1, qt2, qt3, qt4) -> 
-        mk_coords_aux qt1 coords (n/2) (x    ) (y+n/2) ;
-        mk_coords_aux qt2 coords (n/2) (x+n/2) (y+n/2);
+        mk_coords_aux qt1 coords (n/2) (x    ) (y+.nf/.2.) ;
+        mk_coords_aux qt2 coords (n/2) (x+.nf/.2.) (y+.nf/.2.);
         mk_coords_aux qt3 coords (n/2) (x    ) (y    );
-        mk_coords_aux qt4 coords (n/2) (x+n/2) (y    );
+        mk_coords_aux qt4 coords (n/2) (x+.nf/.2.) (y    );
   in 
-  mk_coords_aux qt coords n 0 0 ;
+  mk_coords_aux qt coords n 0.  0.  ;
   coords 
 
-let rec print_coords coords =
-  match 
+
+(*
+  afficher les coords de toutes les zones libres 
+    print_coords coords k : (float*float) Array -> int -> unit 
+    :param:
+        - coords : array de paires de coords de chaque zones libre 
+        - k : len(coords) 
+    :pre-cond: k=len(coords)
+*)
+let print_coords coords k =
+  for i = 0 to k-1 do 
+    let x,y = coords.(i) in
+    printf "%d -> (%.1f , %.1f) \n" i x y;
+  done 
   
   
 
