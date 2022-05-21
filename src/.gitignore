@@ -16,6 +16,8 @@ bin-release/
 #plan 
 plan.md
 
+
+
 # pdf
 *.pdf
 
@@ -30,6 +32,9 @@ exe
 
 # fichier text
 *.txt
+
+# reponse 
+*.md 
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
