@@ -51,3 +51,11 @@ printf "\n******** Terrain a pleusieur rectangles a partir des qt list *******\n
 
 let terrain_num = num_quad terrain in
 printf "\n******** Terrain avec numero *******\n\n"; print_qtree (terrain_num);
+
+
+(****************************************************************************************
+                                        B.q2   
+****************************************************************************************)
+let terrain_num = numerote terrain 0 in 
+let tab_coord = mk_coords fst(terrain_num) snd(terrain_num) n in 
+printf "\n******** coords des zones libres *******\n\n"; print_qtree (tab_coord);

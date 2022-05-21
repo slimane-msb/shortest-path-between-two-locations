@@ -3,6 +3,7 @@
                                         Version 2   
 ****************************************************************************************)
 open Version1;;
+open Printf;;
 (****************************************************************************************
                                         Partie A   
 ****************************************************************************************)
@@ -181,16 +182,14 @@ let rec get_terrain_from_qt qt_list =
                                         Partie B   
 ****************************************************************************************)
 (*
-  numeroter les zones libres du terrain de 1 au NbdeZones libres 
+  numeroter les zones libres du terrain de 0 au NbdeZonesLibres-1 
   :signature: Quad -> Quad
   :param: 
     - qt : quadtree representant le terrain 
   :return: 
     - quadtree numerote   
 *)
-let num_quad  qt = fst (numerote qt 1 ) 
-
-
+let num_quad  qt = fst (numerote qt 0 ) 
 
 
 
@@ -206,7 +205,23 @@ let num_quad  qt = fst (numerote qt 1 )
    - les régions doivent être numérotées de 0 à k-1
  *)
 let mk_coords qt k n =
-  failwith "not implemented"
+  let coords = Array.make k (0,0)  in 
+  let rec mk_coords_aux qt coords n x y = 
+    match qt with 
+    | Mur -> ()
+    | Libre (nb) -> coords.(nb) <- (x+n/2, y+n/2);
+    | Quad (qt1, qt2, qt3, qt4) -> 
+        mk_coords_aux qt1 coords (n/2) (x    ) (y+n/2) ;
+        mk_coords_aux qt2 coords (n/2) (x+n/2) (y+n/2);
+        mk_coords_aux qt3 coords (n/2) (x    ) (y    );
+        mk_coords_aux qt4 coords (n/2) (x+n/2) (y    );
+  in 
+  mk_coords_aux qt coords n 0 0 ;
+  coords 
+
+let rec print_coords coords =
+  match 
+  
   
 
 
