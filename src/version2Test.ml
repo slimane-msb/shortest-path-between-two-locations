@@ -61,3 +61,10 @@ printf "\n******** Terrain avec numero (2rect) *******\n\n"; print_qtree (terrai
 let terrain_num,k = numerote terrain 0 in 
 let tab_coord = mk_coords terrain_num k n in 
 printf "\n******** coords des zones libres de ce dernier *******\n\n"; print_coords tab_coord k;
+
+(****************************************************************************************
+                                        B.q3q4   
+****************************************************************************************)
+let g =  mk_graph terrain_num tab_coord k in 
+printf "\n******** graph a 2 rect *******\n\n";print_graph g ; 
+printf "\n******** graph a 2 rect -compact- *******\n\n";print_graph_compact g; 

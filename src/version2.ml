@@ -293,10 +293,10 @@ type arrete = (int * int)
 let rec get_hori_arrete qt1 qt2 =    
   match (qt1, qt2) with 
   | ( _ ,Mur) | (Mur, _ ) -> [] 
-  | (Libre(s1), Libre(s2)) -> [Arrete(s1, s2) ]
+  | (Libre(s1), Libre(s2)) -> [(s1, s2) ]
   | (Libre(s1), Quad(qt21,qt22,qt23,qt24)) -> 
         (get_hori_arrete qt1 qt21)@(get_hori_arrete qt1 qt23)
-  | (Quad(qt21,qt22,qt23,qt24), Libre(s1) ) -> 
+  | (Quad(qt11,qt12,qt13,qt14), Libre(s2) ) -> 
         (get_hori_arrete qt12 qt2)@(get_hori_arrete qt14 qt2)
   | (Quad(qt11,qt12,qt13,qt14),Quad(qt21,qt22,qt23,qt24) ) -> 
         (get_hori_arrete qt12 qt21)@(get_hori_arrete qt14 qt23)
@@ -305,9 +305,9 @@ let rec get_hori_arrete qt1 qt2 =
   Enumèrer les arêtes à l’interface entre deux quadtrees adjacents horizontalement,   
   interface_horizontale qt: quad -> arrete list 
 *)
-let interface_horizontale qt =
+let interface_horizontale_all qt =
   match qt with 
-  | Libre(s) | Mur -> [] 
+  | Libre(_) | Mur -> [] 
   | Quad(qt1,qt2,qt3,qt4) -> 
     (get_hori_arrete qt1 qt2)@(get_hori_arrete qt3 qt4)
 
@@ -321,10 +321,10 @@ let interface_horizontale qt =
 let rec get_verti_arrete qt1 qt2 =    
   match (qt1, qt2) with 
   | ( _ ,Mur) | (Mur, _ ) -> [] 
-  | (Libre(s1), Libre(s2)) -> [Arrete(s1, s2) ]
+  | (Libre(s1), Libre(s2)) -> [(s1, s2) ]
   | (Libre(s1), Quad(qt21,qt22,qt23,qt24)) -> 
         (get_verti_arrete qt1 qt21)@(get_verti_arrete qt1 qt22)
-  | (Quad(qt21,qt22,qt23,qt24), Libre(s1) ) -> 
+  | (Quad(qt11,qt12,qt13,qt14), Libre(s2) ) -> 
         (get_verti_arrete qt13 qt2)@(get_verti_arrete qt14 qt2)
   | (Quad(qt11,qt12,qt13,qt14),Quad(qt21,qt22,qt23,qt24) ) -> 
         (get_verti_arrete qt13 qt21)@(get_verti_arrete qt14 qt22)
@@ -333,14 +333,58 @@ let rec get_verti_arrete qt1 qt2 =
   Enumèrer les arêtes à l’interface entre deux quadtrees adjacents verticalement,   
   interface_verticale qt: quad -> arrete list 
 *)
-let interface_verticale qt =
+let interface_verticale_all qt =
   match qt with 
-  | Libre(s) | Mur -> [] 
+  | Libre(_) | Mur -> [] 
   | Quad(qt1,qt2,qt3,qt4) -> 
     (get_verti_arrete qt1 qt3)@(get_verti_arrete qt2 qt4)
 
 
+(*
+    get_all_arrete_non_optimise : quad -> arrete list
+    :return: toutes les arretes entres les zones libres
+    <version non pas encore optimisee>
+*)
+let get_all_arrete_Vnon_optimise qt = 
+  (interface_verticale_all qt)@(interface_horizontale_all qt)
 
+
+let rec get_voisins arretes nb = 
+  match arretes with 
+  | [] -> []
+  | (s1,s2)::aaretes -> 
+      if s1 = nb then s1::(get_voisins aaretes nb )
+        else if  s2 = nb then s2::(get_voisins aaretes nb)
+          else  (get_voisins aaretes nb )
+
+
+
+
+(*
+  int -> int -> (int*float)Array -> float 
+*)
+let distance s1 s2 coords = 
+  let x1,y1 = coords.(s1) in 
+  let x2,y2 = coords.(s2) in
+  Float.sqrt((x2-.x1)*.(x2-.x1)+.(y2-.y1)*.(y2-.y1))
+
+
+(*
+    :param: 
+      - voisinList int list 
+      - coords (float*float)Array
+    :add: (int*float) list to g 
+*)
+let add_list_adjacence g nb coords voisin_list = 
+  let rec get_list_adjacence nb coords voisin_list =
+    match voisin_list with
+    | [] -> []
+    | s::vvoisin_list -> 
+      (s, (distance nb s coords))::get_list_adjacence nb coords vvoisin_list 
+  in 
+  let list_adjNB = get_list_adjacence nb coords voisin_list in 
+  g.(nb) <- list_adjNB
+  
 
 (**
   Fonction de construction d'un graphe pondéré à partir d'un quadtree.
@@ -353,16 +397,17 @@ let interface_verticale qt =
 *)
 let mk_graph qt coords k =
   let g = Array.make k [] in 
-  let rec mk_graph_aux g qt coords k = 
+  let arretes = get_all_arrete_Vnon_optimise qt in
+  let rec mk_graph_aux g qt coords = 
     match qt with 
     | Mur -> ()
-    | Libre (nb) -> add_list_adjacence g nb coords (get_voisins qt nb)
+    | Libre (nb) -> add_list_adjacence g nb coords (get_voisins arretes nb)
     | Quad(qt1, qt2, qt3, qt4) -> 
-      mk_coords_aux g qt1 coords k; 
-      mk_coords_aux g qt2 coords k; 
-      mk_coords_aux g qt3 coords k; 
-      mk_coords_aux g qt4 coords k; 
+      mk_graph_aux g qt1 coords; 
+      mk_graph_aux g qt2 coords; 
+      mk_graph_aux g qt3 coords; 
+      mk_graph_aux g qt4 coords; 
   in 
-  mk_coords_aux qt g qt coords k;
+  mk_graph_aux g qt coords;
   g 
 
