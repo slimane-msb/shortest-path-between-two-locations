@@ -62,17 +62,19 @@ corresponding.
 ![image](https://user-images.githubusercontent.com/72779962/168886650-f048c5c6-e050-4e97-8571-b67f16f574b2.png)
 
 
-## Graph from rectangle list : 
-
-![image](https://user-images.githubusercontent.com/72779962/169688560-c876329a-21f9-488b-81ab-58fe92c82670.png)
-
-
-
 
 ![image](https://user-images.githubusercontent.com/72779962/168887178-5651eceb-a53f-4094-bd72-eda53d37a8de.png)
 
 
 ![image](https://user-images.githubusercontent.com/72779962/168888341-905fe76f-c989-44b9-ac13-529411600fe9.png)
+
+
+
+## Graph from rectangle list : 
+
+![image](https://user-images.githubusercontent.com/72779962/169688560-c876329a-21f9-488b-81ab-58fe92c82670.png)
+
+
 
 
 
