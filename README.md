@@ -45,7 +45,7 @@ ocamlc -o exe version1.ml version2.ml version2Test.ml
 * The main programe
 ```
 ocamlc -o exe version1.ml version2.ml version3.ml main.ml
-./exe
+./exe field.txt
 ```
 
 
