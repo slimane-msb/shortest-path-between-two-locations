@@ -285,6 +285,13 @@ let print_graph_compact g =
 type arrete = (int * int)  
 
 (*
+   
+*)
+let print_arretes arretes = 
+  List.iter (fun arrete -> printf "(%d,%d)\n" (fst(arrete)) (snd(arrete))) arretes
+
+
+(*
    get_hori_arrete : quad -> quad -> arrete list entre qt1 qt2 
    tq: 
       (* no, ne, so, se *) du qt1 est (* qt11,qt12,qt13,qt14 *) 
@@ -305,11 +312,15 @@ let rec get_hori_arrete qt1 qt2 =
   Enumèrer les arêtes à l’interface entre deux quadtrees adjacents horizontalement,   
   interface_horizontale qt: quad -> arrete list 
 *)
-let interface_horizontale_all qt =
+let rec interface_horizontale_all qt =
   match qt with 
   | Libre(_) | Mur -> [] 
   | Quad(qt1,qt2,qt3,qt4) -> 
     (get_hori_arrete qt1 qt2)@(get_hori_arrete qt3 qt4)
+    @(interface_horizontale_all qt1)
+    @(interface_horizontale_all qt2)
+    @(interface_horizontale_all qt3)
+    @(interface_horizontale_all qt4)
 
 
 (*
@@ -333,11 +344,15 @@ let rec get_verti_arrete qt1 qt2 =
   Enumèrer les arêtes à l’interface entre deux quadtrees adjacents verticalement,   
   interface_verticale qt: quad -> arrete list 
 *)
-let interface_verticale_all qt =
+let rec interface_verticale_all qt =
   match qt with 
   | Libre(_) | Mur -> [] 
   | Quad(qt1,qt2,qt3,qt4) -> 
     (get_verti_arrete qt1 qt3)@(get_verti_arrete qt2 qt4)
+    @(interface_verticale_all qt1)
+    @(interface_verticale_all qt2)
+    @(interface_verticale_all qt3)
+    @(interface_verticale_all qt4)
 
 
 (*
@@ -353,8 +368,8 @@ let rec get_voisins arretes nb =
   match arretes with 
   | [] -> []
   | (s1,s2)::aaretes -> 
-      if s1 = nb then s1::(get_voisins aaretes nb )
-        else if  s2 = nb then s2::(get_voisins aaretes nb)
+      if s1 = nb then s2::(get_voisins aaretes nb )
+        else if  s2 = nb then s1::(get_voisins aaretes nb)
           else  (get_voisins aaretes nb )
 
 

@@ -66,5 +66,7 @@ printf "\n******** coords des zones libres de ce dernier *******\n\n"; print_coo
                                         B.q3q4   
 ****************************************************************************************)
 let g =  mk_graph terrain_num tab_coord k in 
+let arretes = get_all_arrete_Vnon_optimise terrain_num in 
+printf "\n******** arretes du graph a 2 rect *******\n\n";print_arretes arretes ; 
 printf "\n******** graph a 2 rect *******\n\n";print_graph g ; 
 printf "\n******** graph a 2 rect -compact- *******\n\n";print_graph_compact g; 
