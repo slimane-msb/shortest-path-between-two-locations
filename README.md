@@ -75,6 +75,12 @@ corresponding.
 ![image](https://user-images.githubusercontent.com/72779962/169688560-c876329a-21f9-488b-81ab-58fe92c82670.png)
 
 
+## find distances between the graph nodes :  
+
+![image](https://user-images.githubusercontent.com/72779962/169688726-c6468c3a-96cf-4ed5-a936-b00ded3ea40a.png)
+
+
+
 
 
 
