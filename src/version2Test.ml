@@ -100,4 +100,5 @@ let path = find_path ((float(n)/.2.), 0.) ((float(n)/.2.), float(n)) (qt, n) (g,
 let t4 = Unix.gettimeofday() in
 printf "Temps:\n  construction du quadtree %fs\n  construction du graphe %fs\n  recherche de chemin %fs\n" (t2 -. t1) (t3 -. t2) (t4 -. t3);
 printf "\n******** src(%.3f,%.3f) ----> dest(%.3f,%.3f) - *******\n\n"  (float(n)/.2.) (0.) (float(n)/.2.) (float(n));
-printf "\n******** chemin- *******\n\n";print_path path
+printf "\n******** chemin- *******\n\n";print_path path;
+printf "\n******** afficher le chemin le plus court- *******\n\n";print_path_in_a_matrix path n murs;
