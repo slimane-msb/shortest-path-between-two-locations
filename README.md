@@ -40,7 +40,13 @@ ocamlc unix.cma version1.ml version2.ml dijkstra.ml version2Test.ml  -o exe
 * The main programe
 ```
 ocamlc unix.cma version1.ml version2.ml dijkstra.ml main.ml  -o exe
-./exe field
+./exe "field"
+```
+
+* The optimised version: 
+```
+ocamlc unix.cma version1.ml version2.ml version3.ml main_optimise.ml  -o exe
+./exe "field"
 ```
 
 
