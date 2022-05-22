@@ -285,7 +285,8 @@ let print_graph_compact g =
 type arrete = (int * int)  
 
 (*
-   
+   arrete list -> unit 
+   afficher la list d'arrete du graph 
 *)
 let print_arretes arretes = 
   List.iter (fun arrete -> printf "(%d,%d)\n" (fst(arrete)) (snd(arrete))) arretes
@@ -364,6 +365,13 @@ let get_all_arrete_Vnon_optimise qt =
   (interface_verticale_all qt)@(interface_horizontale_all qt)
 
 
+(*
+  get_voisin : arrete list -> int -> int list 
+  :param: 
+    - arretes: list d'arretes d'un graph 
+    - nb: sommet numero nb du graph 
+  :return: la list des voisins du sommet nb    
+*)
 let rec get_voisins arretes nb = 
   match arretes with 
   | [] -> []
@@ -385,6 +393,7 @@ let distance s1 s2 coords =
 
 
 (*
+    add_list_adjacence: graph -> int -> (int*(float*float) list -> int list -> void )
     :param: 
       - voisinList int list 
       - coords (float*float)Array
