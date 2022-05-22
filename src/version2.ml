@@ -423,7 +423,8 @@ let add_list_adjacence g nb coords voisin_list =
   - (coords) le tableau des coordonnées
   - (k) len(coords)
 *)
-let mk_graph qt coords k =
+let mk_graph qt coords =
+  let k = Array.length coords in 
   let g = Array.make k [] in 
   let arretes = get_all_arrete_Vnon_optimise qt in
   let rec mk_graph_aux g qt coords = 

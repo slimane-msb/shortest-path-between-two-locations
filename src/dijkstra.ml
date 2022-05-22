@@ -8,13 +8,16 @@ open Version2;;
 open Printf;;
 
 (*
-  un tas est un arbre binaire dont chaque nœud contient un élément, et où l’élément
-  porté par un nœud est inférieur ou égal aux éléments portés par ses fils.
+  un tas est un arbre binaire dont chaque nœud contient un élément, et où le fst de l’élément
+  porté par un nœud est inférieur ou égal aux fst des éléments portés par ses fils.
 *)
 type tas  =
   | E 
   | N of tas * (float*int) * tas  
 
+(*
+  initialiser le tas  () -> tas 
+*)
 let create () = ref E  
 
 (*
@@ -35,7 +38,7 @@ let min tas =
   | N (l , n , r ) -> n
 
 (*
-  add x t : int->tas->tas
+  add x t : (float*int)->tas->tas
   ajouter x a la file t   
 *)
 let rec add x t = 
@@ -45,6 +48,10 @@ let rec add x t =
         if (fst(x)) <= (fst(n)) then N ( add n r , x , l )
         else N ( add x r , n , l ) 
  
+(*
+    take one : tas -> (flaot*int)*tas
+    fonction aux de merge 
+*)
 let rec take_one tas = 
   match tas with 
     | E -> assert false
@@ -52,7 +59,11 @@ let rec take_one tas =
     | N (l , n , r ) -> let x , ll = take_one l in
       x , N (r , n , ll)
   
+(*
+  merge t1 t2 : tas -> tas -> tas 
+  fusioner le tas 1 avec tas 2    
 
+*)
 let rec merge t1 t2 = 
   match t1 , t2 with
     | _ , E -> t1
@@ -62,17 +73,25 @@ let rec merge t1 t2 =
           else let x , tt1 = take_one t1 in
             N ( add x ( merge l2 r2 ) , n2 , tt1)
 
+(*
+    remove min : tas -> (flaot*int)*tas 
+    renvoyer le min et le supprimer du tas 
+*)
 let remove_min tas = 
   match tas with 
     | E -> assert false
     | N (l , n , r ) -> (n,(merge l r))
 
 (*
-  :param: ref tas    
+  insert (flaot*int)-> tas ref -> ()
 *) 
 let insert (d,s) file_prio =
   file_prio := add (d,s) !file_prio 
 
+(*
+  extract : tas ref -> (float*int )
+  renvoyer le min tout en le supprimant du tas pointe par file_prio   
+*)
 let extract file_prio =
   let (n,tas) = remove_min !file_prio in 
   file_prio := tas; 
@@ -87,6 +106,7 @@ let extract file_prio =
   le sommet qui le  précède sur un chemin le plus court depuis la source. 
   :pre-cond: : cet algorithme ne fonctionne pas dans le cas où le graphe contient des arêtes dont 
                 la « longueur » serait négative.
+  dijkstra : graph -> int -> (float Array * int Array) 
 *)
 let dijkstra g s =
   let n = Array.length g in
@@ -116,7 +136,8 @@ let dijkstra g s =
 
 
 (*
-  renvoi la case libre la plus proche a au point p(x,y)   
+  renvoi la case libre la plus proche a au point p(x,y) 
+  get_case_libre : (float*float) -> (float*float) Array -> quad -> int   
 *)
 let get_case_libre (x, y) coords qt =
   let closest_zone = ref Int.min_int in
@@ -149,6 +170,8 @@ let get_case_libre (x, y) coords qt =
    - (xArr, yArr) les coordonnées du point d'arrivée
    - (qt, n) le quadtree et la longueur du côté du terrain
    - (g, coords) le graphe et le tableau des coordonnées
+
+   find_path : (float*float) -> (float*float) -> (quad*int) -> (graph*(float*float)Array) -> (float*float) list 
  *)
 let find_path (xDep, yDep) (xArr, yArr) (qt, n) (g, coords) =
   let src = get_case_libre (xDep, yDep) coords qt in

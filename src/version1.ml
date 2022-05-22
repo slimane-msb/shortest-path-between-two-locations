@@ -164,10 +164,16 @@ let rec explore_find_path terrain x1 y1 x2 y2 =
 (*
   afficher un chemin :  (int*int) list -> unit 
 *)
-let print_path p =
+let print_path_numInt p =
   List.iter (fun (x, y) -> Printf.printf "(%d, %d) " x y) p;
   Printf.printf "\n"
 
+(*
+  afficher un chemin :  (float*float) list -> unit 
+*)
+let print_path p =
+  List.iter (fun (x, y) -> Printf.printf " ->   (%.1f, %.1f)" x y) p;
+  Printf.printf "\n\n"
 
   
 
