@@ -40,39 +40,18 @@ The field is summarized by a quadtree. This quadtree defines a weighted graph as
 — the distance between two adjacent vertices is the Euclidean distance between the centers of the two free regions
 corresponding.
 
-![image](https://user-images.githubusercontent.com/72779962/169276762-2954fac7-d1b3-4589-ab4e-5840ee83ffe9.png)
 
-
-![image](https://user-images.githubusercontent.com/72779962/169607334-d8ea3ecd-6004-4ba5-9eee-e2f9cbfecd1a.png)
-
-
-
-![image](https://user-images.githubusercontent.com/72779962/168636176-35a1315a-984e-487b-a3b7-b9633be21979.png)
+![image](https://user-images.githubusercontent.com/72779962/169689085-2e892d0c-a26f-406d-9615-530fc3bab79a.png)
 
 
 ![image](https://user-images.githubusercontent.com/72779962/168881743-139beb88-acfb-467c-b76f-a26f3c79dbe4.png)
 
 
-![image](https://user-images.githubusercontent.com/72779962/168886417-29a1faa1-9695-46c9-8228-d34776aa74b8.png)
-
-
-![image](https://user-images.githubusercontent.com/72779962/168886470-0c3b83ba-9741-4976-aeb5-2b3c3f8ef9ad.png)
-
-
-![image](https://user-images.githubusercontent.com/72779962/168886650-f048c5c6-e050-4e97-8571-b67f16f574b2.png)
-
-
-
-![image](https://user-images.githubusercontent.com/72779962/168887178-5651eceb-a53f-4094-bd72-eda53d37a8de.png)
-
-
-![image](https://user-images.githubusercontent.com/72779962/168888341-905fe76f-c989-44b9-ac13-529411600fe9.png)
 
 
 ## get Quad tree from field : 
 
-![image](https://user-images.githubusercontent.com/72779962/169688907-6653071e-2750-49a8-89fd-dc28c87e6828.png)
-
+![image](https://user-images.githubusercontent.com/72779962/169688984-d2e2499a-5e3b-4323-abcd-ae91bc8deccd.png)
 
 
 ## get vertices coordinates 
