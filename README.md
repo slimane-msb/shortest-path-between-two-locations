@@ -22,6 +22,33 @@ The starting point has the coordinates (n/2, 0), the arrival point the coordinat
 The objective is to create a program which takes as input a file describing the field, and which calculates a route between the starting point and the finishing point. We will be interested in land of various sizes
 
 
+# How to compile :
+To test with different fields: 
+* make terrain files 
+```
+touch terrain.txt terrain2.txt terrain3.txt terrain3rect.txt
+```
+* add n r and the rectangles to these files 
+* and Run Using the corresponding command 
+
+
+* version 1 : 
+``` 
+ocamlc -o exe version1.ml  version1Test.ml
+./exe
+```
+* version 2 
+```
+ocamlc -o exe version1.ml version2.ml version2Test.ml
+./exe
+```
+* The main programe
+```
+ocamlc -o exe version1.ml version2.ml version3.ml main.ml
+./exe
+```
+
+
 
 # version 1:
 The field is represented by a two-dimensional array t, each cell of which corresponds to a square of side 1.
