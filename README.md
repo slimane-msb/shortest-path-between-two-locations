@@ -24,7 +24,7 @@ The objective is to create a program which takes as input a file describing the 
 
 # How to compile :
 To test with different fields: 
-* make terrain files 
+* make terrain files within the src folder
 ```
 touch terrain.txt terrain2.txt terrain3.txt terrain3rect.txt
 ```
@@ -45,7 +45,7 @@ ocamlc -o exe version1.ml version2.ml version2Test.ml
 * The main programe
 ```
 ocamlc -o exe version1.ml version2.ml version3.ml main.ml
-./exe field.txt
+./exe field
 ```
 
 
