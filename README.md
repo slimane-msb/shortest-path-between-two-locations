@@ -69,6 +69,21 @@ corresponding.
 ![image](https://user-images.githubusercontent.com/72779962/168888341-905fe76f-c989-44b9-ac13-529411600fe9.png)
 
 
+## get Quad tree from field : 
+
+![image](https://user-images.githubusercontent.com/72779962/169688907-6653071e-2750-49a8-89fd-dc28c87e6828.png)
+
+
+
+## get vertices coordinates 
+
+![image](https://user-images.githubusercontent.com/72779962/169688865-76d4bd76-3ce3-478c-8d99-73c1988e899e.png)
+
+
+## Get graph edges : 
+
+![image](https://user-images.githubusercontent.com/72779962/169688821-bec316db-47bf-4386-b9ce-0feb1c8684c6.png)
+
 
 ## Graph from rectangle list : 
 
