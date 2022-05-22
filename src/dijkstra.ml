@@ -185,13 +185,4 @@ let find_path (xDep, yDep) (xArr, yArr) (qt, n) (g, coords) =
   in
   (find_path_aux dest [])
  
-let rec get_path_int_from_pos path = 
-  match path with 
-  | [] -> [] 
-  | (x, y)::ppath -> (int_of_float(x),int_of_float(y))::(get_path_int_from_pos ppath)
-  
-let print_path_in_a_matrix path n listTerrain = 
-  let terrain = repTerrain n listTerrain in 
-  let path_int = get_path_int_from_pos path in 
-  print_path_in_terrain terrain n path_int;
 
