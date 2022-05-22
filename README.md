@@ -23,28 +23,23 @@ The objective is to create a program which takes as input a file describing the 
 
 
 # How to compile :
-To test with different fields: 
-* make terrain files within the src folder
-```
-touch terrain.txt terrain2.txt terrain3.txt terrain3rect.txt
-```
-* add n r and the rectangles to these files 
-* and Run Using the corresponding command 
 
+* Run Using the corresponding command 
+* "field" is the file representing the field 
 
 * version 1 : 
 ``` 
-ocamlc -o exe version1.ml  version1Test.ml
-./exe
+ocamlc unix.cma version1.ml  version1Test.ml  -o exe
+./exe "field"
 ```
 * version 2 
 ```
-ocamlc -o exe version1.ml version2.ml version2Test.ml
-./exe
+ocamlc unix.cma version1.ml version2.ml dijkstra.ml version2Test.ml  -o exe
+./exe "fiald"
 ```
 * The main programe
 ```
-ocamlc -o exe version1.ml version2.ml version3.ml main.ml
+ocamlc unix.cma version1.ml version2.ml dijkstra.ml main.ml  -o exe
 ./exe field
 ```
 
