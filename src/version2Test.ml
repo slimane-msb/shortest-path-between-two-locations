@@ -49,10 +49,14 @@ printf "\n******** Terrain a pleusieur rectangles (3 rect) : a partir des qt lis
                                         B.q1   
 ****************************************************************************************)
 let listTerrain, n = (load "terrain.txt") in 
+let listTerrain3, n = (load "terrain3rect.txt") in 
 let terrain = list2qtree n listTerrain in 
+let terrain3 = list2qtree n listTerrain3 in 
 
 let terrain_num = num_quad terrain in
+let terrain_num3 = num_quad terrain3 in
 printf "\n******** Terrain avec numero (2rect) *******\n\n"; print_qtree (terrain_num);
+printf "\n******** Terrain avec numero (3rect) *******\n\n"; print_qtree (terrain_num3);
 
 
 (****************************************************************************************
@@ -60,13 +64,28 @@ printf "\n******** Terrain avec numero (2rect) *******\n\n"; print_qtree (terrai
 ****************************************************************************************)
 let terrain_num,k = numerote terrain 0 in 
 let tab_coord = mk_coords terrain_num k n in 
-printf "\n******** coords des zones libres de ce dernier *******\n\n"; print_coords tab_coord k;
+let terrain_num3,k3 = numerote terrain3 0 in 
+let tab_coord3 = mk_coords terrain_num3 k3 n in 
+printf "\n******** g a 2 rect: coords des zones libres de ce dernier *******\n\n"; print_coords tab_coord k;
+printf "\n******** graph a 3 rect: coords des zones libres de ce dernier *******\n\n"; print_coords tab_coord3 k3;
 
 (****************************************************************************************
                                         B.q3q4   
 ****************************************************************************************)
 let g =  mk_graph terrain_num tab_coord k in 
 let arretes = get_all_arrete_Vnon_optimise terrain_num in 
+let g3 =  mk_graph terrain_num3 tab_coord3 k3 in 
 printf "\n******** arretes du graph a 2 rect *******\n\n";print_arretes arretes ; 
 printf "\n******** graph a 2 rect *******\n\n";print_graph g ; 
 printf "\n******** graph a 2 rect -compact- *******\n\n";print_graph_compact g; 
+printf "\n******** graph a 3 rect -compact- *******\n\n";print_graph_compact g3; 
+
+
+
+(****************************************************************************************
+                                       partie C 
+****************************************************************************************)
+
+(****************************************************************************************
+                                        C.q1   
+****************************************************************************************)
